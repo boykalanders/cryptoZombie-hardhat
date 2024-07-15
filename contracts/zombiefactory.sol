@@ -3,8 +3,9 @@
 pragma solidity 0.8.24;
 
 import "hardhat/console.sol";
+import "./ownable.sol";
 
-contract ZombieFactory {
+contract ZombieFactory is Ownable {
 
     event NewZombie(uint zombieLength, string zombieName, uint zombieDNA);
 
@@ -23,7 +24,7 @@ contract ZombieFactory {
 
     mapping (uint => address) public zombieToOwner; 
     mapping (address => uint) ownerZombieCount;
-
+    
     function _createZombie(string memory _name, uint _dna) internal {
         zombies.push(Zombie(_name, _dna, 1, uint32(block.timestamp + cooldownTime)));
         zombieToOwner[zombies.length-1] = msg.sender;

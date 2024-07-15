@@ -4,7 +4,7 @@ pragma solidity 0.8.24;
 
 import "hardhat/console.sol";
 import "./zombiefactory.sol";
-import "@openzeppelin/contracts/access/Ownable.sol";
+import "./ownable.sol";
 
 interface IKitty {
   function getKitty(uint256 _id) external view returns (
@@ -22,7 +22,7 @@ interface IKitty {
 }
 
 contract ZombieFeeding is ZombieFactory {
-    
+
   IKitty kittyContract;
 
   function setKittyContractAddress(address _address) external onlyOwner {
