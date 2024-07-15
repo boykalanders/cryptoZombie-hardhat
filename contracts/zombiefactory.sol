@@ -10,10 +10,13 @@ contract ZombieFactory {
 
     uint dnaDigits = 16;
     uint dnaModulus = 10 ** dnaDigits;
+    uint cooldownTime = 1 days;
 
     struct Zombie {
         string name;
         uint dna;
+        uint32 level;
+        uint32 readytime;
     }
 
     Zombie[] public zombies;
@@ -22,7 +25,7 @@ contract ZombieFactory {
     mapping (address => uint) ownerZombieCount;
 
     function _createZombie(string memory _name, uint _dna) internal {
-        zombies.push(Zombie(_name, _dna));
+        zombies.push(Zombie(_name, _dna, 1, uint32(block.timestamp + cooldownTime)));
         zombieToOwner[zombies.length-1] = msg.sender;
         ownerZombieCount[msg.sender]++;
         emit NewZombie(zombies.length-1, _name, _dna);
