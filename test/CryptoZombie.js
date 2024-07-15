@@ -13,4 +13,5 @@ describe("CryptoZombie", function () {
 
         console.log(res.logs);
     })
+    
 })
